@@ -12,7 +12,7 @@ class AdminPostsController extends Controller
 public function index()
 {
     $posts=Post::orderBy('created_at','DESC')->get();
-    $data=['posts'=>$posts];
+    $data=['posts' =>$posts];
     return view('admin.posts.index',$data);
 }
 public function store(Request $request)
@@ -37,4 +37,10 @@ public function update(Request $request,$id)
     $post->update($request->all());
     return redirect()->route('admin.posts.index');
 }
+public function destroy($id)
+{
+Post::destroy($id);
+return redirect()->route('admin.posts.index');
+}
+
 }
