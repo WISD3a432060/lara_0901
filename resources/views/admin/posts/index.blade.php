@@ -38,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($postsas$post)
+                @foreach ($posts as $post)
                     <tr>
                         <td>{{$post->id}}</td>
                         <td>{{$post->title}}</td>
@@ -46,7 +46,11 @@
                         <td>
                             <a href ="{{route('admin.posts.edit',$post->id)}}">編輯</a>
                             /
-                            <a href ="#">刪除</a>
+                            <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button class="btn btn-link">刪除</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
